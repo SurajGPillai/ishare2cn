@@ -317,7 +317,7 @@ function mylabs_install_lab_images_just_for_only_readable_labs() {
     fi
     
     # Remove csv file
-    rm "$(pwd)"/"$FILENAME" > /dev/null 2>&1
+    rm "$(pwd)"/"$FILENAME"
     
     # Remove files
     rm /opt/unetlab/labs/iol_images.txt
@@ -608,7 +608,7 @@ function install_lab_images_just_for_only_readable_labs() {
     fi
     
     # Remove csv file
-    rm "$(pwd)"/"$FILENAME" > /dev/null 2>&1
+    rm "$(pwd)"/"$FILENAME"
     
     # Remove files
     rm /opt/unetlab/labs/iol_images.txt
@@ -713,9 +713,9 @@ function download_lab_iol_images() {
         
         BIN_NAME=$line
         FILENAME=BIN_URL.csv
-        rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+        rm "$(pwd)"/$FILENAME
         URL=$BIN_URL
-        wget --connect-timeout 5 -O $FILENAME "$URL" > /dev/null 2>&1
+        wget --connect-timeout 5 -O $FILENAME "$URL"
         FLAG=0
         
         corrections_for_bin_images_in_lab_function "$BIN_NAME" "$LAB_PATH"
@@ -740,7 +740,7 @@ function download_lab_iol_images() {
             echo -e "${YELLOW}$STR${NO_COLOR}"
         fi
     done < $filename1
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
 }
 
 function download_lab_dynamips_images() {
@@ -751,9 +751,9 @@ function download_lab_dynamips_images() {
         
         DYNAMIPS_NAME=$line
         FILENAME=DYNAMIPS_URL.csv
-        rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+        rm "$(pwd)"/$FILENAME
         URL=$DYNAMIPS_URL
-        wget --connect-timeout 5 -O $FILENAME "$URL" > /dev/null 2>&1
+        wget --connect-timeout 5 -O $FILENAME "$URL"
         FLAG=0
         while IFS=',' read -r col1 col2 col3 col4 col5
         do
@@ -775,7 +775,7 @@ function download_lab_dynamips_images() {
             echo -e "${YELLOW}$STR${NO_COLOR}"
         fi
     done < $filename1
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
 }
 
 function download_lab_qemu_images() {
@@ -787,9 +787,9 @@ function download_lab_qemu_images() {
         
         QEMU_NAME=$line
         FILENAME=QEMU_URL.csv
-        rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+        rm "$(pwd)"/$FILENAME
         URL=$QEMU_URL
-        wget --connect-timeout 5 -O $FILENAME "$URL" > /dev/null 2>&1
+        wget --connect-timeout 5 -O $FILENAME "$URL"
         FLAG=0
         
         corrections_for_qemu_images_in_lab_function "$QEMU_NAME"
@@ -814,7 +814,7 @@ function download_lab_qemu_images() {
             echo -e "${YELLOW}$STR${NO_COLOR}"
         fi
     done < $filename1
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
 }
 
 function check_docker_service_status() {
@@ -943,7 +943,7 @@ function upgrade_ishare2() {
     fi
     
     rm /usr/sbin/ishare2
-    wget -O /usr/sbin/ishare2 $URL_ISHARE2 > /dev/null 2>&1
+    wget -O /usr/sbin/ishare2 $URL_ISHARE2
     chmod +x /usr/sbin/ishare2
 
     echo "ishare2 was upgraded from $LOCAL_VALUE to $REMOTE_VALUE"
@@ -963,19 +963,19 @@ function menu_ishare2_upgrade_pnetlab() {
     select opt in "${options[@]}" "Exit"; do 
         case "$REPLY" in
         1) 
-            wget -O upgrade.sh $URL_UPGRADE_PNETLAB_FROM_4_2_10_TO_5_0_1 > /dev/null 2>&1
+            wget -O upgrade.sh $URL_UPGRADE_PNETLAB_FROM_4_2_10_TO_5_0_1
             chmod +x upgrade.sh
             bash upgrade.sh
             break
             ;;
         2)
-            wget -O upgrade.sh $URL_UPGRADE_PNETLAB_FROM_4_2_10_TO_5_2_7 > /dev/null 2>&1
+            wget -O upgrade.sh $URL_UPGRADE_PNETLAB_FROM_4_2_10_TO_5_2_7
             chmod +x upgrade.sh
             bash upgrade.sh
             break
             ;;
         3)
-            wget -O upgrade.sh $URL_UPGRADE_PNETLAB_FROM_5_0_1_TO_5_2_7 > /dev/null 2>&1
+            wget -O upgrade.sh $URL_UPGRADE_PNETLAB_FROM_5_0_1_TO_5_2_7
             chmod +x upgrade.sh
             bash upgrade.sh
             break
@@ -1037,8 +1037,8 @@ function general_available_list() {
     URL=$3
     
     echo -e "\n$TYPE available images list\n"
-    rm /opt/unetlab/addons/"$FILENAME" > /dev/null 2>&1
-    wget --connect-timeout 5 -O "$FILENAME" "$URL" > /dev/null 2>&1
+    rm /opt/unetlab/addons/"$FILENAME"
+    wget --connect-timeout 5 -O "$FILENAME" "$URL"
     
     if [[ $TYPE == "QEMU" ]]; then
         awk -F, '{print $1,$2,$3,$4}' "$FILENAME" | column -t
@@ -1057,11 +1057,11 @@ function generate_a_new_license() {
 
     if [[ -e $PYTHON_FILE ]]; then rm $PYTHON_FILE ; fi
 
-    wget -O $PYTHON_FILE $URL_CISCO_IOU_KEYGEN_PY > /dev/null 2>&1
-    python $PYTHON_FILE > /dev/null 2>&1
+    wget -O $PYTHON_FILE $URL_CISCO_IOU_KEYGEN_PY
+    python $PYTHON_FILE
     
     if ! [[ -e $PERL_FILE ]]; then
-        wget -O $PERL_FILE $URL_KEEPALIVE_PL > /dev/null 2>&1
+        wget -O $PERL_FILE $URL_KEEPALIVE_PL
     fi
     echo "Done"
 }
@@ -1130,9 +1130,9 @@ function pull_all_iol_images() {
     BIN_URL=$URL_PREFIX$BIN_GID$URL_POSTFIX
     
     FILENAME=BIN_URL.csv
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
     URL=$BIN_URL
-    wget --connect-timeout 5 -O $FILENAME "$URL" > /dev/null 2>&1
+    wget --connect-timeout 5 -O $FILENAME "$URL"
     
     while IFS=',' read -r col1 _ _ _ _
     do
@@ -1148,7 +1148,7 @@ function pull_all_iol_images() {
         ishare2 pull bin "$i"
     done
     
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
     echo -e "\nFinished"
 }
 
@@ -1159,9 +1159,9 @@ function pull_all_dynamips_images() {
     DYNAMIPS_URL=$URL_PREFIX$DYNAMIPS_GID$URL_POSTFIX
     
     FILENAME=DYNAMIPS_URL.csv
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
     URL=$DYNAMIPS_URL
-    wget --connect-timeout 5 -O $FILENAME "$URL" > /dev/null 2>&1
+    wget --connect-timeout 5 -O $FILENAME "$URL"
     
     while IFS=',' read -r col1 _ _ _ _
     do
@@ -1177,7 +1177,7 @@ function pull_all_dynamips_images() {
         ishare2 pull dynamips "$i"
     done
     
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
     echo -e "\nFinished"
 }
 
@@ -1191,10 +1191,10 @@ function pull_dynamips() {
     
     DYNAMIPS_NUMBER=$PARAMETER
     FILENAME=DYNAMIPS_URL.csv
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
     URL=$DYNAMIPS_URL
     
-    wget --connect-timeout 5 -O $FILENAME "$URL" > /dev/null 2>&1
+    wget --connect-timeout 5 -O $FILENAME "$URL"
     FLAG=0
     while IFS=',' read -r col1 col2 col3 col4 col5
     do
@@ -1219,7 +1219,7 @@ function pull_dynamips() {
     fi
     
     # Remove csv file
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
     
     if [[ $FLAG = 1 ]]; then
         if [[ -e /opt/unetlab/addons/dynamips/"$NAME" ]]; then
@@ -1255,9 +1255,9 @@ function pull_bin() {
     BIN_NUMBER=$PARAMETER
     
     FILENAME=BIN_URL.csv
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
     URL=$BIN_URL
-    wget --connect-timeout 5 -O $FILENAME "$URL" > /dev/null 2>&1
+    wget --connect-timeout 5 -O $FILENAME "$URL"
     FLAG=0
     while IFS=',' read -r col1 col2 col3 col4 col5
     do
@@ -1283,7 +1283,7 @@ function pull_bin() {
     fi
     
     # Remove csv file
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
     
     if [[ $FLAG = 1 ]]; then
         if [[ -e /opt/unetlab/addons/iol/bin/"$NAME" ]]; then
@@ -1519,11 +1519,11 @@ function rar_files_function() {
         file=$(ls "${DIR}"/*"$EXTENSION")
         
         if ! [[ -e /usr/bin/unrar ]]; then
-            apt -qq update > /dev/null 2>&1 && apt -qq install --assume-yes unrar > /dev/null 2>&1
+            apt -qq update && apt -qq install --assume-yes unrar
         fi
         
         echo -e "\nDecompressing $EXTENSION file..."
-        unrar e "$file" "$DIR" > /dev/null 2>&1
+        unrar e "$file" "$DIR"
         echo -e "Decompressed. Image ready to use"
         rm "$file"
     fi
@@ -1688,7 +1688,7 @@ function corrections_for_iol_images() {
 
         FILE="$YML_DIR"i86bi_linux_l2.yml
         if ! [[ -e $FILE ]]; then
-            wget -O $FILE $URL_I86BI_LINUX_L2_YML > /dev/null 2>&1
+            wget -O $FILE $URL_I86BI_LINUX_L2_YML
         fi
     fi
     
@@ -1697,7 +1697,7 @@ function corrections_for_iol_images() {
 
         FILE="$YML_DIR"i86bi_linux_l3.yml
         if ! [[ -e $FILE ]]; then
-            wget -O $FILE $URL_I86BI_LINUX_L3_YML > /dev/null 2>&1
+            wget -O $FILE $URL_I86BI_LINUX_L3_YML
         fi
     fi
 }
@@ -1766,13 +1766,13 @@ function corrections_for_dynamips_images() {
     SUBSTRING="c2600"
     if [[ "$NAME" == *"$SUBSTRING"* ]]; then
         FILE="$YML_DIR"c2600.yml
-        wget -O $FILE $URL_C2600_YML > /dev/null 2>&1
+        wget -O $FILE $URL_C2600_YML
     fi
     
     SUBSTRING="c1760"
     if [[ "$NAME" == *"$SUBSTRING"* ]]; then
         FILE="$YML_DIR"c1760.yml
-        wget -O $FILE $URL_C1760_YML > /dev/null 2>&1
+        wget -O $FILE $URL_C1760_YML
     fi
 }
 
@@ -1787,9 +1787,9 @@ function pull_qemu() {
     QEMU_NUMBER=$PARAMETER
     
     FILENAME=QEMU_URL.csv
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
     URL=$QEMU_URL
-    wget --connect-timeout 5 -O $FILENAME "$URL" > /dev/null 2>&1
+    wget --connect-timeout 5 -O $FILENAME "$URL"
     FLAG=0
     declare -a myArray=()
     while IFS=',' read -r col1 col2 col3 col4 col5 col6 col7 col8 col9 col10 col11 col12 col13 col14 col15 col16
@@ -1844,7 +1844,7 @@ function pull_qemu() {
     fi
     
     # Remove csv file
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
     
     if [[ $FLAG = 1 ]]; then
         if [[ -d /opt/unetlab/addons/qemu/"$FOLDERNAME" ]]; then
@@ -1906,9 +1906,9 @@ function filter_bin() {
     NAME_TO_SEARCH_FOR=$1
     
     FILENAME=BIN_URL.csv
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
     URL=$BIN_URL
-    wget --connect-timeout 5 -O $FILENAME "$URL" > /dev/null 2>&1
+    wget --connect-timeout 5 -O $FILENAME "$URL"
     #awk -F, '{print $1,$2,$3,$4,$5}' $FILENAME | column -t
     
     FLAG_TO_SHOW_RESULTS_BIN=0
@@ -1935,17 +1935,17 @@ function filter_bin() {
     fi
     
     # Remove csv files
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
-    rm "$(pwd)"/new.csv > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
+    rm "$(pwd)"/new.csv
 }
 
 function filter_dynamips() {
     NAME_TO_SEARCH_FOR=$1
     
     FILENAME=DYNAMIPS_URL.csv
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
     URL=$DYNAMIPS_URL
-    wget --connect-timeout 5 -O $FILENAME "$URL" > /dev/null 2>&1
+    wget --connect-timeout 5 -O $FILENAME "$URL"
     
     FLAG_TO_SHOW_RESULTS_DYNAMIPS=0
     while IFS=',' read -r col1 col2 col3 col4 col5
@@ -1971,17 +1971,17 @@ function filter_dynamips() {
     fi
     
     # Remove csv files
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
-    rm "$(pwd)"/new.csv > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
+    rm "$(pwd)"/new.csv
 }
 
 function filter_qemu() {
     NAME_TO_SEARCH_FOR=$1
     
     FILENAME=QEMU_URL.csv
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
     URL=$QEMU_URL
-    wget --connect-timeout 5 -O $FILENAME "$URL" > /dev/null 2>&1
+    wget --connect-timeout 5 -O $FILENAME "$URL"
     
     FLAG_TO_SHOW_RESULTS_QEMU=0
     while IFS=',' read -r col1 col2 col3 col4 col5
@@ -2006,8 +2006,8 @@ function filter_qemu() {
     fi
     
     # Remove csv files
-    rm "$(pwd)"/$FILENAME > /dev/null 2>&1
-    rm "$(pwd)"/new.csv > /dev/null 2>&1
+    rm "$(pwd)"/$FILENAME
+    rm "$(pwd)"/new.csv
 }
 
 function selector() {   
@@ -2020,15 +2020,15 @@ function selector() {
         elif [[ "$2" = "qemu" ]]; then # ishare2 search qemu
             FILENAME=QEMU_URL.csv
             general_available_list QEMU "$FILENAME" "$QEMU_URL"
-            rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+            rm "$(pwd)"/$FILENAME
         elif [[ "$2" = "dynamips" ]]; then # ishare2 search dynamips
             FILENAME=DYNAMIPS_URL.csv
             general_available_list DYNAMIPS "$FILENAME" "$DYNAMIPS_URL"
-            rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+            rm "$(pwd)"/$FILENAME
         elif [[ "$2" = "bin" ]]; then # ishare2 search bin
             FILENAME=BIN_URL.csv
             general_available_list BIN "$FILENAME" "$BIN_URL"
-            rm "$(pwd)"/$FILENAME > /dev/null 2>&1
+            rm "$(pwd)"/$FILENAME
         else # 1) ishare2 search 2) ishare2 search <number> 3) ishare2 search <string>
             if [[ $2 ]]; then
                 filter_bin "$2"
