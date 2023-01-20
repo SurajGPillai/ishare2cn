@@ -11,7 +11,7 @@ function set_color_constants() {
 function set_url_constants() {
     URL_ID_LIST=https://raw.githubusercontent.com/ishare2cn/ishare2cn/main/id_list
     URL_VERSION=https://raw.githubusercontent.com/pnetlabrepo/ishare2/main/version
-    URL_ISHARE2=https://raw.githubusercontent.com/ishare2cn/ishare2/main/ishare2cn
+    URL_ISHARE2=https://raw.githubusercontent.com/ishare2cn/ishare2/main/ishare2
     URL_CHANGELOG_MD=https://raw.githubusercontent.com/pnetlabrepo/ishare2/main/CHANGELOG.md
     URL_CISCO_IOU_KEYGEN_PY=https://raw.githubusercontent.com/pnetlabrepo/ishare2/main/iol/bin/CiscoIOUKeygen.py
     URL_KEEPALIVE_PL=https://raw.githubusercontent.com/pnetlabrepo/ishare2/main/iol/bin/keepalive.pl
